@@ -23,26 +23,35 @@ const stepItems = document.querySelectorAll(".step");
 // ---------- Show Step ----------
 function showStep(step){
 
+    // Ensure the target step element exists before proceeding
+    const target = document.getElementById("step"+step);
+    if(!target){
+        // Nothing to show on this page
+        return;
+    }
+
     currentStep = step;
 
-    // Hide all
-    step1.classList.remove("active");
-    step2.classList.remove("active");
-    step3.classList.remove("active");
+    // Hide all (only if elements exist)
+    if(step1 && step1.classList) step1.classList.remove("active");
+    if(step2 && step2.classList) step2.classList.remove("active");
+    if(step3 && step3.classList) step3.classList.remove("active");
 
-    if(successPage){
+    if(successPage && successPage.classList) {
         successPage.classList.remove("active");
     }
 
-    // Remove active
-    stepItems.forEach(item=>item.classList.remove("active"));
+    // Remove active from indicators
+    if(stepItems && stepItems.forEach){
+        stepItems.forEach(item=> item.classList.remove("active"));
+    }
 
     // Show selected
-    document.getElementById("step"+step).classList.add("active");
+    target.classList.add("active");
 
-    // Highlight completed/current
-    for(let i=0;i<step;i++){
-        stepItems[i].classList.add("active");
+    // Highlight completed/current (guard against shorter stepItems list)
+    for(let i=0;i<step && i<stepItems.length;i++){
+        if(stepItems[i] && stepItems[i].classList) stepItems[i].classList.add("active");
     }
 
     updateProgress();
@@ -52,38 +61,42 @@ function showStep(step){
 // ---------- Progress ----------
 function updateProgress(){
 
+    // Only update if progress elements are present
+    if(!progressFill || !progressText || !stepText) return;
+
     const percent = [33,66,100];
 
-    progressFill.style.width = percent[currentStep-1]+"%";
+    // Guard index range
+    const idx = Math.max(0, Math.min(percent.length-1, currentStep-1));
 
-    progressText.innerHTML =
-    percent[currentStep-1]+"%";
+    progressFill.style.width = percent[idx]+"%";
 
-    stepText.innerHTML =
-    "Step "+currentStep+" of 3";
+    progressText.innerHTML = percent[idx]+"%";
+
+    stepText.innerHTML = "Step "+currentStep+" of 3";
 
 }
 
 // ---------- Navigation ----------
+const prevStep2Btn = document.getElementById("prevStep2");
+if(prevStep2Btn) {
+    prevStep2Btn.addEventListener("click",()=>{
+        showStep(1);
+    });
+}
 
-document
-.getElementById("prevStep2")
-.addEventListener("click",()=>{
-
-    showStep(1);
-
-});
-
-document
-.getElementById("prevStep3")
-.addEventListener("click",()=>{
-
-    showStep(2);
-
-});
+const prevStep3Btn = document.getElementById("prevStep3");
+if(prevStep3Btn) {
+    prevStep3Btn.addEventListener("click",()=>{
+        showStep(2);
+    });
+}
 
 // ---------- Initial ----------
-showStep(1);
+// Only show step if the step element exists on the page
+if(document.getElementById("step1")){
+    showStep(1);
+}
 
 // =====================================
 // Part 2 : Sponsor Verification
@@ -97,56 +110,75 @@ const status = document.getElementById("status");
 const verifyBtn = document.getElementById("verifySponsorBtn");
 const nextStep1 = document.getElementById("nextStep1");
 
-// Disable Next initially
-nextStep1.disabled = true;
+// Disable Next initially (only if present)
+if(nextStep1) nextStep1.disabled = true;
 
 // Verify Sponsor
-verifyBtn.addEventListener("click", async ()=>{
+if(verifyBtn){
+    verifyBtn.addEventListener("click", async ()=>{
 
-    const id = sponsorId.value.trim();
+        const id = sponsorId ? sponsorId.value.trim() : "";
 
-    if(id===""){
+        if(id===""){
 
-        alert("Please enter Sponsor ID");
+            alert("Please enter Sponsor ID");
 
-        sponsorId.focus();
+            if(sponsorId) sponsorId.focus();
 
-        return;
+            return;
 
-    }
+        }
 
-    verifyBtn.disabled = true;
-    verifyBtn.innerHTML = "Verifying...";
+        verifyBtn.disabled = true;
+        verifyBtn.innerHTML = "Verifying...";
 
-    status.innerHTML = "";
-    sponsorName.value = "";
+        if(status) status.innerHTML = "";
+        if(sponsorName) sponsorName.value = "";
 
-    try{
+        try{
 
-        const result = await verifySponsor(id);
+            // Expect verifySponsor to be defined elsewhere (API call)
+            const result = await verifySponsor(id);
 
-        if(result.status){
+            if(result && result.status){
 
-    sponsorName.value = result.sponsorName;
+                if(sponsorName) sponsorName.value = result.sponsorName || "";
 
-    status.innerHTML = "✅ Sponsor Verified";
+                if(status){
+                    status.innerHTML = "✅ Sponsor Verified";
+                    status.style.color = "green";
+                }
 
-    status.style.color = "green";
+                if(nextStep1) nextStep1.disabled = false;
 
-    nextStep1.disabled = false;
+                if(sponsorId) sponsorId.readOnly = true;
 
-    sponsorId.readOnly = true;
+                verifyBtn.innerHTML = "✅ Verified";
+                verifyBtn.style.background = "#28a745";
+                verifyBtn.style.color = "#ffffff";
+                verifyBtn.disabled = true;
 
-    verifyBtn.innerHTML = "✅ Verified";
-    verifyBtn.style.background = "#28a745";
-    verifyBtn.style.color = "#ffffff";
-    verifyBtn.disabled = true;
+            }else{
 
-        }else{
+                if(status){
+                    status.innerHTML = "❌ Invalid Sponsor ID";
+                    status.style.color = "red";
+                }
 
-            status.innerHTML = "❌ Invalid Sponsor ID";
+                verifyBtn.disabled = false;
 
-            status.style.color = "red";
+                verifyBtn.innerHTML = "Verify Sponsor";
+
+            }
+
+        }catch(err){
+
+            console.error(err);
+
+            if(status){
+                status.innerHTML = "❌ Server Error";
+                status.style.color = "red";
+            }
 
             verifyBtn.disabled = false;
 
@@ -154,28 +186,15 @@ verifyBtn.addEventListener("click", async ()=>{
 
         }
 
-    }catch(err){
-
-        console.error(err);
-
-        status.innerHTML = "❌ Server Error";
-
-        status.style.color = "red";
-
-        verifyBtn.disabled = false;
-
-        verifyBtn.innerHTML = "Verify Sponsor";
-
-    }
-
-});
+    });
+}
 
 // Next Button
-nextStep1.addEventListener("click",()=>{
-
-    showStep(2);
-
-});
+if(nextStep1){
+    nextStep1.addEventListener("click",()=>{
+        showStep(2);
+    });
+}
 
 // =====================================
 // Part 3 : Personal Details & Review
@@ -200,63 +219,64 @@ const reviewPlace = document.getElementById("reviewPlace");
 const nextStep2 = document.getElementById("nextStep2");
 
 // Next Button - Step 2
-nextStep2.addEventListener("click",()=>{
+if(nextStep2){
+    nextStep2.addEventListener("click",()=>{
 
-    // Full Name
-    if(fullName.value.trim()===""){
+        // Full Name
+        if(!fullName || fullName.value.trim()===""){
 
-        alert("Please enter Full Name");
+            alert("Please enter Full Name");
 
-        fullName.focus();
+            if(fullName) fullName.focus();
 
-        return;
+            return;
 
-    }
+        }
 
-    // Mobile
-    if(!/^[0-9]{10}$/.test(mobile.value.trim())){
+        // Mobile
+        if(!mobile || !/^[0-9]{10}$/.test(mobile.value.trim())){
 
-        alert("Please enter a valid 10-digit Mobile Number");
+            alert("Please enter a valid 10-digit Mobile Number");
 
-        mobile.focus();
+            if(mobile) mobile.focus();
 
-        return;
+            return;
 
-    }
-    
-    if(password.value !== confirmPassword.value){
+        }
+        
+        if(!password || password.value !== (confirmPassword ? confirmPassword.value : "")){
 
-    alert("Password and Confirm Password do not match");
+            alert("Password and Confirm Password do not match");
 
-    password.focus();
+            if(password) password.focus();
 
-    return;
+            return;
 
-    }
-    
-    // Place
-    if(place.value.trim()===""){
+        }
+        
+        // Place
+        if(!place || place.value.trim()===""){
 
-        alert("Please enter Place");
+            alert("Please enter Place");
 
-        place.focus();
+            if(place) place.focus();
 
-        return;
+            return;
 
-    }
+        }
 
-    // Review Screen
-    reviewSponsorId.textContent = sponsorId.value;
-    reviewSponsorName.textContent = sponsorName.value;
-    reviewFullName.textContent = fullName.value;
-    reviewMobile.textContent = mobile.value;
-    reviewEmail.textContent =
-        email.value.trim()==="" ? "Not Provided" : email.value;
-    reviewPlace.textContent = place.value;
+        // Review Screen (only set review fields if they exist)
+        if(reviewSponsorId) reviewSponsorId.textContent = sponsorId ? sponsorId.value : "";
+        if(reviewSponsorName) reviewSponsorName.textContent = sponsorName ? sponsorName.value : "";
+        if(reviewFullName) reviewFullName.textContent = fullName ? fullName.value : "";
+        if(reviewMobile) reviewMobile.textContent = mobile ? mobile.value : "";
+        if(reviewEmail) reviewEmail.textContent = (email && email.value.trim()!=="") ? email.value : "Not Provided";
+        if(reviewPlace) reviewPlace.textContent = place ? place.value : "";
 
-    showStep(3);
+        showStep(3);
 
-});
+    });
+}
 // =====================================
 // Part 4 : Registration Submit
 // =====================================
@@ -264,50 +284,56 @@ nextStep2.addEventListener("click",()=>{
 const registerBtn = document.getElementById("registerBtn");
 const agree = document.getElementById("agree");
 
-registerBtn.addEventListener("click", async () => {
+if(registerBtn){
+    registerBtn.addEventListener("click", async () => {
 
-    // Terms Check
-    if(!agree.checked){
+        // Terms Check
+        if(agree && !agree.checked){
 
-        alert("Please accept the Terms & Conditions");
+            alert("Please accept the Terms & Conditions");
 
-        return;
+            return;
 
-    }
+        }
 
-    registerBtn.disabled = true;
-    registerBtn.innerHTML = "Registering...";
+        registerBtn.disabled = true;
+        registerBtn.innerHTML = "Registering...";
 
-    try{
+        try{
 
-        const result = await registerPartner({
+            // Expect registerPartner to be defined elsewhere
+            const result = await registerPartner({
+                sponsorId: sponsorId ? sponsorId.value.trim() : "",
+                sponsorName: sponsorName ? sponsorName.value.trim() : "",
+                fullName: fullName ? fullName.value.trim() : "",
+                mobile: mobile ? mobile.value.trim() : "",
+                email: email ? email.value.trim() : "",
+                place: place ? place.value.trim() : "",
+                password: password ? password.value : ""
+            });
 
-    sponsorId: sponsorId.value.trim(),
+            if(result && result.success){
 
-    sponsorName: sponsorName.value.trim(),
+                const partnerEl = document.getElementById("partnerIdText");
+                if(partnerEl) partnerEl.innerHTML = result.partnerId;
 
-    fullName: fullName.value.trim(),
+                showSuccess(result.partnerId);
 
-    mobile: mobile.value.trim(),
+            }else{
 
-    email: email.value.trim(),
+                alert(result ? (result.message || "Registration Failed") : "Registration Failed");
 
-    place: place.value.trim(),
+                registerBtn.disabled = false;
 
-    password: password.value
+                registerBtn.innerHTML = "Register";
 
-});
+            }
 
-        if(result.success){
+        }catch(err){
 
-            document.getElementById("partnerIdText").innerHTML =
-            result.partnerId;
+            console.error(err);
 
-            showSuccess(result.partnerId);
-
-        }else{
-
-            alert(result.message || "Registration Failed");
+            alert("Server Error");
 
             registerBtn.disabled = false;
 
@@ -315,33 +341,24 @@ registerBtn.addEventListener("click", async () => {
 
         }
 
-    }catch(err){
-
-        console.error(err);
-
-        alert("Server Error");
-
-        registerBtn.disabled = false;
-
-        registerBtn.innerHTML = "Register";
-
-    }
-
-});
+    });
+}
 // =====================================
 // Success Screen
 // =====================================
 
 function showSuccess(partnerId){
 
-    document.getElementById("partnerIdText").textContent = partnerId;
+    const partnerEl = document.getElementById("partnerIdText");
+    if(partnerEl) partnerEl.textContent = partnerId;
 
-    step1.classList.remove("active");
-    step2.classList.remove("active");
-    step3.classList.remove("active");
+    if(step1 && step1.classList) step1.classList.remove("active");
+    if(step2 && step2.classList) step2.classList.remove("active");
+    if(step3 && step3.classList) step3.classList.remove("active");
 
-    successPage.classList.add("active");
+    if(successPage && successPage.classList) successPage.classList.add("active");
 
+    // Redirect to login if present
     setTimeout(()=>{
         window.location.href = "login.html";
     },3000);
