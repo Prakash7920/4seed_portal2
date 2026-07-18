@@ -1,1 +1,392 @@
+/**
+ * Responsive Design Styles
+ * Mobile-first approach with tablet and desktop breakpoints
+ */
 
+/* ========== Tablet Breakpoint (768px) ========== */
+@media (min-width: 768px) {
+    h1 {
+        font-size: 3rem;
+    }
+
+    .nav-links {
+        display: flex;
+    }
+
+    .menu-toggle {
+        display: none;
+    }
+
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .hero-buttons {
+        gap: var(--spacing-lg);
+    }
+
+    .stats {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .about-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .process-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .login-container {
+        margin: var(--spacing-2xl) auto;
+    }
+
+    .navbar {
+        padding: var(--spacing-lg) var(--spacing-2xl);
+    }
+
+    section {
+        padding: var(--spacing-2xl) var(--spacing-2xl);
+    }
+}
+
+/* ========== Desktop Breakpoint (1024px) ========== */
+@media (min-width: 1024px) {
+    body {
+        font-size: 1.1rem;
+    }
+
+    .navbar {
+        padding: var(--spacing-lg) var(--spacing-2xl);
+    }
+
+    .hero {
+        min-height: 80vh;
+        padding: var(--spacing-2xl) var(--spacing-2xl);
+    }
+
+    .hero-content h1 {
+        font-size: 3.5rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .login-container {
+        margin: var(--spacing-2xl) auto;
+        max-width: 450px;
+    }
+}
+
+/* ========== Large Desktop Breakpoint (1200px) ========== */
+@media (min-width: 1200px) {
+    section {
+        padding: var(--spacing-2xl) 0;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--spacing-2xl);
+    }
+}
+
+/* ========== Extra Large Desktop (1400px) ========== */
+@media (min-width: 1400px) {
+    .navbar {
+        max-width: 1400px;
+    }
+
+    section {
+        max-width: 1400px;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+    }
+}
+
+/* ========== Mobile-Specific Styles ========== */
+@media (max-width: 767px) {
+    .navbar {
+        flex-wrap: wrap;
+        padding: var(--spacing-md);
+    }
+
+    .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #fff;
+        padding: var(--spacing-lg);
+        gap: var(--spacing-md);
+        width: 100%;
+    }
+
+    .hero {
+        min-height: 60vh;
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .hero .btn {
+        width: 100%;
+    }
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+
+    .stat-box {
+        padding: var(--spacing-md);
+    }
+
+    .stat-icon {
+        font-size: 2rem;
+    }
+
+    .stat-box h2 {
+        font-size: 1.5rem;
+    }
+
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .process-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-links {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+
+    .login-container {
+        margin: var(--spacing-lg);
+        padding: var(--spacing-md);
+    }
+
+    .hero-buttons {
+        gap: var(--spacing-sm);
+    }
+
+    .hero .btn {
+        padding: var(--spacing-md) var(--spacing-lg);
+    }
+
+    .section-title h2 {
+        font-size: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    h3 {
+        font-size: 1.25rem;
+    }
+
+    .notification {
+        left: var(--spacing-md);
+        right: var(--spacing-md);
+        top: auto;
+        bottom: var(--spacing-lg);
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .button-group .btn {
+        width: 100%;
+    }
+
+    .form-group {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .table-section {
+        overflow-x: auto;
+    }
+
+    table {
+        min-width: 600px;
+    }
+
+    .card {
+        padding: var(--spacing-md);
+    }
+}
+
+/* ========== Landscape Orientation (Mobile) ========== */
+@media (max-width: 767px) and (orientation: landscape) {
+    .hero {
+        min-height: 50vh;
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+        margin-bottom: var(--spacing-md);
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-lg);
+    }
+
+    .hero .btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.9rem;
+    }
+
+    section {
+        padding: var(--spacing-lg) var(--spacing-md);
+    }
+}
+
+/* ========== Print Styles ========== */
+@media print {
+    header,
+    footer,
+    .menu-toggle,
+    .btn,
+    .hero-buttons {
+        display: none;
+    }
+
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    a {
+        color: #000;
+        text-decoration: underline;
+    }
+
+    section {
+        page-break-inside: avoid;
+    }
+}
+
+/* ========== Dark Mode (Optional) ========== */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #1a1a1a;
+        color: #f0f0f0;
+    }
+
+    header {
+        background: #242424;
+    }
+
+    .card,
+    .feature-card,
+    .stat-box,
+    .login-container,
+    .modal-content {
+        background: #2d2d2d;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="tel"],
+    input[type="number"],
+    select,
+    textarea {
+        background: #333;
+        color: #f0f0f0;
+        border-color: #444;
+    }
+
+    .nav-links a,
+    .footer-links a {
+        color: #f0f0f0;
+    }
+}
+
+/* ========== Touch Device Optimization ========== */
+@media (hover: none) and (pointer: coarse) {
+    button,
+    .btn,
+    a {
+        padding: var(--spacing-lg);
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .nav-links a {
+        padding: var(--spacing-md);
+    }
+}
+
+/* ========== High Resolution Displays ========== */
+@media (-webkit-min-device-pixel-ratio: 2),
+       (min-resolution: 192dpi) {
+    :root {
+        --spacing-lg: 1.75rem;
+    }
+}
+
+/* ========== Reduce Motion Support ========== */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .reveal,
+    .reveal.revealed {
+        transform: none;
+    }
+}
+
+/* ========== Accessibility: Focus Visible ========== */
+:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}

@@ -1,96 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Partner Login - 4Seed</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login to your 4Seed Partner Account">
+    <meta name="theme-color" content="#2ecc71">
+    
+    <title>Partner Login - 4Seed</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 
 <body>
+    <div class="login-container">
+        <div class="page-header">
+            <a href="index.html" class="logo">🌱 4Seed</a>
+            <h1>Welcome Back</h1>
+            <p>Continue your 4Seed journey</p>
+        </div>
 
-<div class="login-container">
+        <form id="loginForm" class="form-container">
+            <div class="form-group">
+                <label for="loginId">Partner ID / Mobile Number</label>
+                <input
+                    type="text"
+                    id="loginId"
+                    name="loginId"
+                    placeholder="Enter Partner ID or Mobile"
+                    required
+                    autocomplete="off"
+                    aria-describedby="loginIdError">
+                <span id="loginIdError" class="error-message" role="alert"></span>
+            </div>
 
-<div class="page-header">
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <input
+                    type="password"
+                    id="loginPassword"
+                    name="loginPassword"
+                    placeholder="Enter Password"
+                    required
+                    aria-describedby="loginPasswordError">
+                <span id="loginPasswordError" class="error-message" role="alert"></span>
+            </div>
 
-<div class="logo">🌱</div>
+            <div class="login-options">
+                <label class="checkbox-group">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <span>Remember Me</span>
+                </label>
+                <a href="forgot-password.html" class="forgot-link">Forgot Password?</a>
+            </div>
 
-<h1>Welcome Back</h1>
+            <div id="formError" class="error-message" role="alert"></div>
+            <div id="successMessage" class="success-message" role="status"></div>
 
-<p>Continue your 4Seed journey</p>
+            <button type="submit" class="btn btn-primary" id="loginBtn">
+                <span id="btnText">Login</span>
+                <span id="spinner" class="spinner" style="display:none;"></span>
+            </button>
 
-</div>
+            <p class="register-link">
+                Don't have an account?
+                <a href="register.html">Register Now</a>
+            </p>
+        </form>
+    </div>
 
-<form id="loginForm">
-
-<label>Partner ID / Mobile Number</label>
-
-<input
-type="text"
-id="loginId"
-placeholder="Enter Partner ID or Mobile"
-required>
-
-<label>Password</label>
-
-<input
-type="password"
-id="loginPassword"
-placeholder="Enter Password"
-required>
-
-<div class="login-options">
-
-<label>
-
-<input type="checkbox">
-
-Remember Me
-
-</label>
-
-<a href="#">Forgot Password?</a>
-
-</div>
-
-<button
-type="submit"
-class="btn btn-primary">
-
-Login
-
-</button>
-
-<p class="register-link">
-
-Don't have an account?
-
-<a href="register.html">
-
-Register Now
-
-</a>
-
-</p>
-
-</form>
-
-</div>
-
-<script src="js/login.js"></script>
-
+    <script src="js/login.js" defer></script>
 </body>
 
 </html>
