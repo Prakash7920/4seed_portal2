@@ -1,90 +1,109 @@
-const partner = JSON.parse(localStorage.getItem("partner"));
+// ================================
+// 4Seed Portal API Service
+// ================================
+
+const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbw9P5iUDKYl3nXAaFfTdEO_rf7PfHSiLkwTjXq7HIpic7tOdg85aqIIeexbF63qrzIU/exec";
+
+const partnerRaw = localStorage.getItem("partner");
+const partner = partnerRaw ? JSON.parse(partnerRaw) : null;
 
 if (!partner) {
     window.location.href = "login.html";
 }
 
-document.getElementById("partnerName").textContent =
-    partner.name;
+// Safely set UI elements if they exist
+const elPartnerName = document.getElementById("partnerName");
+const elPartnerId = document.getElementById("partnerId");
+const elSponsorName = document.getElementById("sponsorName");
+const elWelcomeTitle = document.getElementById("welcomeTitle");
+const elLogoutBtn = document.getElementById("logoutBtn");
 
-document.getElementById("partnerId").textContent =
-    partner.partnerId;
+if (elPartnerName) elPartnerName.textContent = partner.name || "";
+if (elPartnerId) elPartnerId.textContent = partner.partnerId || "";
+if (elSponsorName) elSponsorName.textContent = partner.sponsorName || "";
+if (elWelcomeTitle) elWelcomeTitle.textContent = "Welcome Back, " + (partner.name || "") + " 👋";
 
-document.getElementById("sponsorName").textContent =
-    partner.sponsorName;
+// Consolidated logout handler (confirm once)
+if (elLogoutBtn) {
+    elLogoutBtn.addEventListener("click", function () {
+        if (confirm("Are you sure you want to logout?")) {
+            localStorage.removeItem("partner");
+            window.location.href = "login.html";
+        }
+    });
+}
 
-// Welcome Message
-document.getElementById("welcomeTitle").textContent =
-"Welcome Back, " + partner.name + " 👋";
+function openWithdraw() {
+    const popup = document.getElementById("withdrawPopup");
+    if (popup) popup.style.display = "flex";
+}
 
-document.getElementById("logoutBtn").addEventListener("click", function () {
+function closeWithdraw() {
+    const popup = document.getElementById("withdrawPopup");
+    if (popup) popup.style.display = "none";
+}
 
-    localStorage.removeItem("partner");
+function sendWithdrawRequest() {
+    const amountEl = document.getElementById("withdrawAmount");
+    const amountVal = amountEl ? amountEl.value.trim() : "";
 
-    window.location.href = "login.html";
-
-});
-document.getElementById("logoutBtn").addEventListener("click", function () {
-
-    if (confirm("Are you sure you want to logout?")) {
-
-    localStorage.removeItem("partner");
-
-    window.location.href = "login.html";
-
+    if (!amountVal) {
+        alert("Please enter an amount");
+        return;
     }
-});
-function openWithdraw(){
+    const amountNum = Number(amountVal);
+    if (isNaN(amountNum) || amountNum <= 0) {
+        alert("Please enter a valid amount");
+        return;
+    }
 
-    document.getElementById("withdrawPopup").style.display="flex";
-
-}
-
-function closeWithdraw(){
-
-    document.getElementById("withdrawPopup").style.display="none";
-
-}
-function sendWithdrawRequest(){
-alert("Button clicked");
-
-}
-    const amount = document.getElementById("withdrawAmount").value;
-
-    fetch(WEB_APP_URL,{
-        method:"POST",
-        body:JSON.stringify({
-            action:"withdrawRequest",
-            partnerId:partner.partnerId,
-            name:partner.name,
-            amount:amount
+    fetch(WEB_APP_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json;charset=utf-8", "Accept": "application/json" },
+        body: JSON.stringify({
+            action: "withdrawRequest",
+            partnerId: partner.partnerId,
+            name: partner.name,
+            amount: amountNum
         })
     })
-    .then(res=>res.text())
-    .then(data=>{
-        alert(data);
+    .then(res => {
+        // API might return JSON or text; try JSON first
+        const ct = res.headers.get("content-type") || "";
+        if (ct.includes("application/json")) return res.json();
+        return res.text();
     })
-    .catch(err=>{
-        alert(err);
+    .then(data => {
+        if (typeof data === "object") {
+            alert(data.message || JSON.stringify(data));
+        } else {
+            alert(data);
+        }
+    })
+    .catch(err => {
+        console.error("Withdraw request failed:", err);
+        alert("Withdraw request failed. Please try again.");
     });
-
 }
 
 // ====================================
 // Dashboard Statistics
 // ====================================
 
-document.getElementById("welcomeTitle").innerHTML =
-"Welcome, " + partner.name + " 👋";
+if (elWelcomeTitle) elWelcomeTitle.innerHTML = "Welcome, " + (partner.name || "") + " 👋";
+const elWalletBalance = document.getElementById("walletBalance");
+const elBusinessVolume = document.getElementById("businessVolume");
+const elRankName = document.getElementById("rankName");
 
-document.getElementById("walletBalance").innerHTML = "₹0";
+if (elWalletBalance) elWalletBalance.innerHTML = "₹0";
+if (elBusinessVolume) elBusinessVolume.innerHTML = "₹0";
+if (elRankName) elRankName.innerHTML = "Starter";
 
-document.getElementById("businessVolume").innerHTML = "₹0";
+const elTeamCount = document.getElementById("teamCount");
 
-document.getElementById("rankName").innerHTML = "Starter";
-
-fetch("https://script.google.com/macros/s/AKfycbw9P5iUDKYl3nXAaFfTdEO_rf7PfHSiLkwTjXq7HIpic7tOdg85aqIIeexbF63qrzIU/exec", {
+fetch(WEB_APP_URL, {
     method: "POST",
+    headers: { "Content-Type": "application/json;charset=utf-8", "Accept": "application/json" },
     body: JSON.stringify({
         action: "getTeam",
         partnerId: partner.partnerId
@@ -92,13 +111,10 @@ fetch("https://script.google.com/macros/s/AKfycbw9P5iUDKYl3nXAaFfTdEO_rf7PfHSiLk
 })
 .then(res => res.json())
 .then(data => {
-
-    if (data.success) {
-
-        document.getElementById("teamCount").textContent =
-            data.team.length;
-
+    if (data && data.success) {
+        if (elTeamCount) elTeamCount.textContent = (Array.isArray(data.team) ? data.team.length : 0);
     }
-
 })
-.catch(error => console.log(error));
+.catch(error => {
+    console.error("Error fetching team for dashboard:", error);
+});
