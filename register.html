@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+
+4Seed Partner Registration
+
+</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="register-container">
+
+<!-- Header -->
+
+<div class="page-header">
+
+<div class="logo">
+
+🌱 4Seed
+
+</div>
+
+<h1>
+
+Partner Registration
+
+</h1>
+
+<p>
+
+Join the 4Seed Partner Network
+
+</p>
+
+</div>
+
+<!-- Progress -->
+
+<div class="progress-wrapper">
+
+<div class="progress-top">
+
+<span id="stepText">
+
+Step 1 of 3
+
+</span>
+
+<span id="progressText">
+
+33%
+
+</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+id="progressFill"
+class="progress-fill">
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Step Indicator -->
+
+<div class="step-indicator">
+
+<div class="step active">
+
+<div class="circle">
+
+1
+
+</div>
+
+<p>
+
+Sponsor
+
+</p>
+
+</div>
+
+<div class="line">
+
+</div>
+
+<div class="step">
+
+<div class="circle">
+
+2
+
+</div>
+
+<p>
+
+Personal
+
+</p>
+
+</div>
+
+<div class="line">
+
+</div>
+
+<div class="step">
+
+<div class="circle">
+
+3
+
+</div>
+
+<p>
+
+Review
+
+</p>
+
+</div>
+
+</div>
+
+<!-- Step 1 -->
+
+<div
+id="step1"
+class="form-step active">
+
+<h2>
+
+Sponsor Information
+
+</h2>
+
+<label>
+
+Sponsor ID
+
+</label>
+
+<input
+
+type="text"
+
+id="sponsorId"
+
+placeholder="Enter Sponsor ID"
+
+autocomplete="off">
+
+<button
+type="button"
+id="verifySponsorBtn">
+
+Verify Sponsor
+
+</button>
+
+<label>
+
+Sponsor Full Name
+
+</label>
+
+<input
+
+type="text"
+
+id="sponsorName"
+
+placeholder="Auto Verified"
+
+readonly>
+
+<div id="status">
+
+</div>
+
+<div class="button-group">
+
+<button
+id="nextStep1">
+
+Next →
+
+</button>
+
+</div>
+
+</div>
+<!-- Step 2 -->
+
+<div id="step2" class="form-step">
+
+<h2>Personal Information</h2>
+
+<label>Full Name</label>
+
+<input
+type="text"
+id="fullName"
+placeholder="Enter Full Name">
+
+<label>Mobile Number</label>
+
+<input
+type="tel"
+id="mobile"
+placeholder="Enter Mobile Number">
+
+<label>Email Address (Optional)</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter Email Address">
+
+<label>Create Password</label>
+
+<input
+type="password"
+id="password"
+placeholder="Create Password"
+required>
+
+<label>Confirm Password</label>
+
+<input
+type="password"
+id="confirmPassword"
+placeholder="Confirm Password"
+required>
+
+<label>Place</label>
+
+<input
+type="text"
+id="place"
+placeholder="Enter Place">
+
+<div class="button-group">
+
+<button
+type="button"
+id="prevStep2">
+
+← Previous
+
+</button>
+
+<button
+type="button"
+id="nextStep2">
+
+Next →
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- Step 3 -->
+
+<div id="step3" class="form-step">
+
+<h2>Review Details</h2>
+
+<div class="review-box">
+
+<p><strong>Sponsor ID :</strong>
+<span id="reviewSponsorId"></span></p>
+
+<p><strong>Sponsor Name :</strong>
+<span id="reviewSponsorName"></span></p>
+
+<p><strong>Full Name :</strong>
+<span id="reviewFullName"></span></p>
+
+<p><strong>Mobile :</strong>
+<span id="reviewMobile"></span></p>
+
+<p><strong>Email :</strong>
+<span id="reviewEmail"></span></p>
+
+<p><strong>Place :</strong>
+<span id="reviewPlace"></span></p>
+
+</div>
+
+<label class="terms">
+
+<input
+type="checkbox"
+id="agree">
+
+I agree to the Terms & Conditions
+
+</label>
+
+<div class="button-group">
+
+<button
+type="button"
+id="prevStep3">
+
+← Previous
+
+</button>
+
+<button
+type="button"
+id="registerBtn">
+
+Register
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- Success -->
+
+<div id="successPage" class="form-step">
+
+<div class="success-card">
+
+<h2>🎉 Welcome to 4Seed</h2>
+
+<p>
+
+Your Partner ID has been created successfully.
+
+Welcome to the 4Seed Partner Community.
+
+</p>
+
+<h3>
+
+Partner ID
+
+</h3>
+
+<h1 id="partnerIdText">
+
+4S1001
+
+</h1>
+
+<p id="countdown">
+
+Redirecting to Login...
+
+3
+
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+<footer>
+
+© 2026 4Seed Portal
+
+</footer>
+
+
+<script src="js/api.js"></script>
+
+<script src="js/register.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard - 4Seed</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <div class="dashboard-welcome">
+
+        <h2 id="welcomeTitle">Welcome Back 👋</h2>
+
+        <h3 id="partnerName">Loading...</h3>
+
+        <p>
+            Partner ID :
+            <span id="partnerId">Loading...</span>
+        </p>
+
+        <p>
+            Sponsor :
+            <span id="sponsorName">Loading...</span>
+        </p>
+
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="dashboard-card"
+onclick="window.location='idcard.html'">
+🪪
+<h3>Digital ID</h3>
+
+        </div>
+
+        <div class="dashboard-card"
+onclick="window.location='team.html'">
+👥
+<h3>My Team</h3>
+<p id="teamCount">0</p>
+</div>
+
+        <div class="dashboard-card"
+onclick="window.location='referral.html'">
+🔗
+<h3>Referral</h3>
+        </div>
+        
+        <div class="dashboard-card">
+💰
+<h3>Wallet</h3>
+<p id="walletBalance">₹0</p>
+        </div>
+
+        <div class="dashboard-card">
+    <button onclick="openWithdraw()">💸 Withdraw</button>
+        </div>
+
+        <div class="dashboard-card"
+onclick="window.location='rank.html'">
+🏆
+<h3>My Rank</h3>
+<p id="rankName">Starter</p>
+</div>
+        <div class="dashboard-card">
+📈
+<h3>Business</h3>
+<p id="businessVolume">₹0</p>
+        </div>
+
+        <div class="dashboard-card" id="logoutBtn">
+            🚪
+            <h3>Logout</h3>
+        </div>
+
+    </div>
+
+<div id="withdrawPopup" class="popup">
+
+    <div class="popup-content">
+
+        <h2>Withdraw Request</h2>
+
+        <input
+            type="number"
+            id="withdrawAmount"
+            placeholder="Enter Amount">
+
+        <br><br>
+
+        <button onclick="sendWithdrawRequest()">
+            Submit
+        </button>
+
+        <button onclick="closeWithdraw()">
+            Cancel
+        </button>
+
+    </div>
+
+</div>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

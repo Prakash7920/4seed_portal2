@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>My Team - 4Seed</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="team-container">
+
+<h2>🌳 My Team</h2>
+
+<div class="tree">
+
+<div class="root">
+
+<div class="member" id="myCard">
+
+<h3 id="myName">Loading...</h3>
+
+<p id="myId"></p>
+
+</div>
+
+</div>
+
+<div id="breadcrumb" class="breadcrumb">
+    <span onclick="goHome()">🏠 Home</span>
+</div>
+    
+<div class="children">
+
+    <div class="tree-card">
+        <div class="line"></div>
+        <div class="member" id="slot1" onclick="loadTeam(this)"></div>
+    </div>
+
+    <div class="tree-card">
+        <div class="line"></div>
+        <div class="member" id="slot2" onclick="loadTeam(this)"></div>
+    </div>
+
+    <div class="tree-card">
+        <div class="line"></div>
+        <div class="member" id="slot3" onclick="loadTeam(this)"></div>
+    </div>
+
+    <div class="tree-card">
+        <div class="line"></div>
+        <div class="member" id="slot4" onclick="loadTeam(this)"></div>
+    </div>
+
+    <div class="tree-card">
+        <div class="line"></div>
+        <div class="member" id="slot5" onclick="loadTeam(this)"></div>
+    </div>
+
+    <div class="stats">
+    <div class="stat-card">
+        <h3 id="directCount">0</h3>
+        <p>Direct Team</p>
+    </div>
+
+    <div class="stat-card">
+        <h3 id="emptyCount">5</h3>
+        <p>Empty Slots</p>
+    </div>
+    </div>
+    
+</div>
+
+</div>
+
+</div>
+
+<script src="js/team.js"></script>
+
+<div id="memberPopup" class="popup">
+
+    <div class="popup-content">
+
+        <span class="close" onclick="closePopup()">&times;</span>
+
+        <h2 id="popupName"></h2>
+
+        <p id="popupId"></p>
+
+        <p id="popupSponsor"></p>
+
+        <button onclick="viewDownline()">View Downline</button>
+
+    </div>
+
+</div>
+
+</body>
+</html>

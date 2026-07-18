@@ -1,0 +1,113 @@
+/* ===================================
+   4Seed Portal V3.1
+   Theme System
+=================================== */
+
+:root{
+
+/* Brand Colors */
+--primary:#0B7A3D;
+--primary-dark:#075C2E;
+--secondary:#16A34A;
+--gold:#D4AF37;
+
+--white:#FFFFFF;
+--background:#F8FAFC;
+
+--dark:#0F172A;
+--text:#334155;
+
+--success:#22C55E;
+--warning:#F59E0B;
+--danger:#EF4444;
+
+/* Border */
+--border:#E2E8F0;
+
+/* Radius */
+--radius-sm:8px;
+--radius-md:14px;
+--radius-lg:22px;
+--radius-xl:30px;
+
+/* Shadow */
+--shadow-sm:
+0 4px 10px rgba(0,0,0,.08);
+
+--shadow-md:
+0 12px 30px rgba(0,0,0,.12);
+
+--shadow-lg:
+0 20px 45px rgba(0,0,0,.18);
+
+/* Transition */
+--transition:.35s ease;
+
+/* Container */
+--container:1200px;
+
+}
+
+/* Reset */
+
+*{
+
+margin:0;
+
+padding:0;
+
+box-sizing:border-box;
+
+}
+
+html{
+
+scroll-behavior:smooth;
+
+}
+
+body{
+
+font-family:'Poppins',sans-serif;
+
+background:var(--background);
+
+color:var(--text);
+
+line-height:1.6;
+
+overflow-x:hidden;
+
+}
+
+/* Links */
+
+a{
+
+text-decoration:none;
+
+color:inherit;
+
+}
+
+/* Images */
+
+img{
+
+max-width:100%;
+
+display:block;
+
+}
+
+/* Container */
+
+.container{
+
+width:92%;
+
+max-width:var(--container);
+
+margin:auto;
+
+}

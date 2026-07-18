@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>4Seed Admin</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<h1>4Seed Admin Panel</h1>
+
+<div class="cards">
+
+<div class="card">
+<h2 id="totalPartners">0</h2>
+<p>Total Partners</p>
+</div>
+
+<div class="card">
+<h2 id="activePartners">0</h2>
+<p>Active Partners</p>
+</div>
+
+<div class="card">
+<h2 id="walletAmount">₹0</h2>
+<p>Total Wallet</p>
+</div>
+
+<div class="card">
+    <h2 id="blockedPartners">0</h2>
+    <p>Blocked Partners</p>
+</div>
+
+</div>
+
+<h2>Partners</h2>
+
+<input
+    type="text"
+    id="searchBox"
+    placeholder="Search Partner ID or Name"
+    onkeyup="searchPartner()"
+>
+
+<br><br>
+
+<table id="partnerTable">
+
+<thead>
+
+<tr>
+
+<th>Partner ID</th>
+<th>Name</th>
+<th>Wallet</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+</tbody>
+
+</table>
+
+<script src="admin.js"></script>
+
+<div id="editPopup" class="popup">
+
+    <div class="popup-content">
+
+        <h2>Edit Partner</h2>
+
+        <input type="text" id="editPartnerId" readonly><br><br>
+
+        <input type="text" id="editName"><br><br>
+
+        <input type="number" id="editWallet"><br><br>
+
+        <button onclick="savePartner()">Save</button>
+
+        <button onclick="closePopup()">Close</button>
+
+    </div>
+
+</div>
+  
+</body>
+</html>
