@@ -1,409 +1,164 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="4Seed Partner Registration — join the 4Seed Partner Network" />
+  <title>4Seed Partner Registration</title>
 
-<meta charset="UTF-8">
+  <link rel="icon" href="favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>
-
-4Seed Partner Registration
-
-</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="css/style.css">
-
+  <!-- Consider adding a Content-Security-Policy on the server -->
 </head>
-
 <body>
-
-<div class="register-container">
-
-<!-- Header -->
-
-<div class="page-header">
-
-<div class="logo">
-
-🌱 4Seed
-
-</div>
-
-<h1>
-
-Partner Registration
-
-</h1>
-
-<p>
-
-Join the 4Seed Partner Network
-
-</p>
-
-</div>
-
-<!-- Progress -->
-
-<div class="progress-wrapper">
-
-<div class="progress-top">
-
-<span id="stepText">
-
-Step 1 of 3
-
-</span>
-
-<span id="progressText">
-
-33%
-
-</span>
-
-</div>
-
-<div class="progress-bar">
-
-<div
-id="progressFill"
-class="progress-fill">
-
-</div>
-
-</div>
-
-</div>
-
-<!-- Step Indicator -->
-
-<div class="step-indicator">
-
-<div class="step active">
-
-<div class="circle">
-
-1
-
-</div>
-
-<p>
-
-Sponsor
-
-</p>
-
-</div>
-
-<div class="line">
-
-</div>
-
-<div class="step">
-
-<div class="circle">
-
-2
-
-</div>
-
-<p>
-
-Personal
-
-</p>
-
-</div>
-
-<div class="line">
-
-</div>
-
-<div class="step">
-
-<div class="circle">
-
-3
-
-</div>
-
-<p>
-
-Review
-
-</p>
-
-</div>
-
-</div>
-
-<!-- Step 1 -->
-
-<div
-id="step1"
-class="form-step active">
-
-<h2>
-
-Sponsor Information
-
-</h2>
-
-<label>
-
-Sponsor ID
-
-</label>
-
-<input
-
-type="text"
-
-id="sponsorId"
-
-placeholder="Enter Sponsor ID"
-
-autocomplete="off">
-
-<button
-type="button"
-id="verifySponsorBtn">
-
-Verify Sponsor
-
-</button>
-
-<label>
-
-Sponsor Full Name
-
-</label>
-
-<input
-
-type="text"
-
-id="sponsorName"
-
-placeholder="Auto Verified"
-
-readonly>
-
-<div id="status">
-
-</div>
-
-<div class="button-group">
-
-<button
-id="nextStep1">
-
-Next →
-
-</button>
-
-</div>
-
-</div>
-<!-- Step 2 -->
-
-<div id="step2" class="form-step">
-
-<h2>Personal Information</h2>
-
-<label>Full Name</label>
-
-<input
-type="text"
-id="fullName"
-placeholder="Enter Full Name">
-
-<label>Mobile Number</label>
-
-<input
-type="tel"
-id="mobile"
-placeholder="Enter Mobile Number">
-
-<label>Email Address (Optional)</label>
-
-<input
-type="email"
-id="email"
-placeholder="Enter Email Address">
-
-<label>Create Password</label>
-
-<input
-type="password"
-id="password"
-placeholder="Create Password"
-required>
-
-<label>Confirm Password</label>
-
-<input
-type="password"
-id="confirmPassword"
-placeholder="Confirm Password"
-required>
-
-<label>Place</label>
-
-<input
-type="text"
-id="place"
-placeholder="Enter Place">
-
-<div class="button-group">
-
-<button
-type="button"
-id="prevStep2">
-
-← Previous
-
-</button>
-
-<button
-type="button"
-id="nextStep2">
-
-Next →
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- Step 3 -->
-
-<div id="step3" class="form-step">
-
-<h2>Review Details</h2>
-
-<div class="review-box">
-
-<p><strong>Sponsor ID :</strong>
-<span id="reviewSponsorId"></span></p>
-
-<p><strong>Sponsor Name :</strong>
-<span id="reviewSponsorName"></span></p>
-
-<p><strong>Full Name :</strong>
-<span id="reviewFullName"></span></p>
-
-<p><strong>Mobile :</strong>
-<span id="reviewMobile"></span></p>
-
-<p><strong>Email :</strong>
-<span id="reviewEmail"></span></p>
-
-<p><strong>Place :</strong>
-<span id="reviewPlace"></span></p>
-
-</div>
-
-<label class="terms">
-
-<input
-type="checkbox"
-id="agree">
-
-I agree to the Terms & Conditions
-
-</label>
-
-<div class="button-group">
-
-<button
-type="button"
-id="prevStep3">
-
-← Previous
-
-</button>
-
-<button
-type="button"
-id="registerBtn">
-
-Register
-
-</button>
-
-</div>
-
-</div>
-
-
-<!-- Success -->
-
-<div id="successPage" class="form-step">
-
-<div class="success-card">
-
-<h2>🎉 Welcome to 4Seed</h2>
-
-<p>
-
-Your Partner ID has been created successfully.
-
-Welcome to the 4Seed Partner Community.
-
-</p>
-
-<h3>
-
-Partner ID
-
-</h3>
-
-<h1 id="partnerIdText">
-
-4S1001
-
-</h1>
-
-<p id="countdown">
-
-Redirecting to Login...
-
-3
-
-</p>
-
-</div>
-
-</div>
-
-
-</div>
-
-<footer>
-
-© 2026 4Seed Portal
-
-</footer>
-
-
-<script src="js/api.js"></script>
-
-<script src="js/register.js"></script>
-
+  <main class="register-container" id="main">
+    <!-- Header -->
+    <header class="page-header" role="banner">
+      <div class="logo" aria-hidden="true">🌱 4Seed</div>
+      <h1>Partner Registration</h1>
+      <p>Join the 4Seed Partner Network</p>
+    </header>
+
+    <!-- Progress (accessible) -->
+    <div class="progress-wrapper" aria-hidden="false">
+      <div class="progress-top">
+        <span id="stepText" aria-live="polite">Step 1 of 3</span>
+        <span id="progressText">33%</span>
+      </div>
+
+      <!-- semantic progress with aria fallback -->
+      <progress id="progress" max="3" value="1" aria-labelledby="stepText progressText">33%</progress>
+
+      <div class="progress-bar" role="presentation">
+        <div id="progressFill" class="progress-fill" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <!-- Step Indicator -->
+    <nav class="step-indicator" aria-label="Registration steps">
+      <button class="step active" type="button" aria-current="step" aria-disabled="true">
+        <span class="circle">1</span>
+        <span class="step-label">Sponsor</span>
+      </button>
+      <div class="line" aria-hidden="true"></div>
+      <button class="step" type="button" aria-disabled="true">
+        <span class="circle">2</span>
+        <span class="step-label">Personal</span>
+      </button>
+      <div class="line" aria-hidden="true"></div>
+      <button class="step" type="button" aria-disabled="true">
+        <span class="circle">3</span>
+        <span class="step-label">Review</span>
+      </button>
+    </nav>
+
+    <!-- Registration form (semantic) -->
+    <form id="registrationForm" class="registration-form" method="post" action="/api/register" novalidate>
+      <!-- include a server-side CSRF token here -->
+      <input type="hidden" name="_csrf" value="{{CSRF_TOKEN_PLACEHOLDER}}" />
+
+      <!-- Step 1 -->
+      <section id="step1" class="form-step active" aria-labelledby="step1-heading">
+        <h2 id="step1-heading">Sponsor Information</h2>
+        <div class="form-row">
+          <label for="sponsorId">Sponsor ID</label>
+          <input type="text" id="sponsorId" name="sponsorId" placeholder="Enter Sponsor ID" autocomplete="off" required />
+          <button type="button" id="verifySponsorBtn" aria-describedby="status" class="btn">Verify Sponsor</button>
+        </div>
+
+        <div class="form-row">
+          <label for="sponsorName">Sponsor Full Name</label>
+          <input type="text" id="sponsorName" name="sponsorName" placeholder="Auto Verified" readonly aria-readonly="true" />
+        </div>
+
+        <div id="status" class="status" role="status" aria-live="polite"></div>
+
+        <div class="button-group">
+          <button id="nextStep1" type="button" class="btn-primary">Next →</button>
+        </div>
+      </section>
+
+      <!-- Step 2 -->
+      <section id="step2" class="form-step" aria-hidden="true" aria-labelledby="step2-heading">
+        <h2 id="step2-heading">Personal Information</h2>
+
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" placeholder="Enter Full Name" autocomplete="name" required />
+
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" id="mobile" name="mobile" placeholder="Enter Mobile Number" inputmode="tel" pattern="[0-9]{10}" autocomplete="tel" required />
+        <small id="mobileHelp">Enter 10 digits (numbers only).</small>
+
+        <label for="email">Email Address (Optional)</label>
+        <input type="email" id="email" name="email" placeholder="Enter Email Address" autocomplete="email" />
+
+        <label for="password">Create Password</label>
+        <input type="password" id="password" name="password" placeholder="Create Password" autocomplete="new-password" minlength="8" required />
+        <meter id="passwordStrength" min="0" max="4" low="2" high="3" optimum="4" value="0" aria-hidden="true"></meter>
+
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" autocomplete="new-password" minlength="8" required />
+
+        <label for="place">Place</label>
+        <input type="text" id="place" name="place" placeholder="Enter Place" autocomplete="address-level2" />
+
+        <div class="button-group">
+          <button type="button" id="prevStep2" class="btn">← Previous</button>
+          <button type="button" id="nextStep2" class="btn-primary">Next →</button>
+        </div>
+      </section>
+
+      <!-- Step 3 (Review) -->
+      <section id="step3" class="form-step" aria-hidden="true" aria-labelledby="step3-heading">
+        <h2 id="step3-heading">Review Details</h2>
+
+        <div class="review-box" id="reviewBox" aria-live="polite">
+          <p><strong>Sponsor ID :</strong> <span id="reviewSponsorId"></span></p>
+          <p><strong>Sponsor Name :</strong> <span id="reviewSponsorName"></span></p>
+          <p><strong>Full Name :</strong> <span id="reviewFullName"></span></p>
+          <p><strong>Mobile :</strong> <span id="reviewMobile"></span></p>
+          <p><strong>Email :</strong> <span id="reviewEmail"></span></p>
+          <p><strong>Place :</strong> <span id="reviewPlace"></span></p>
+        </div>
+
+        <label class="terms">
+          <input type="checkbox" id="agree" name="agree" required />
+          I agree to the Terms &amp; Conditions
+        </label>
+
+        <div class="button-group">
+          <button type="button" id="prevStep3" class="btn">← Previous</button>
+          <button type="submit" id="registerBtn" class="btn-primary">Register</button>
+        </div>
+      </section>
+    </form>
+
+    <!-- Success -->
+    <section id="successPage" class="form-step" aria-hidden="true">
+      <div class="success-card" role="status" aria-live="polite">
+        <h2>🎉 Welcome to 4Seed</h2>
+        <p>Your Partner ID has been created successfully. Welcome to the 4Seed Partner Community.</p>
+        <h3>Partner ID</h3>
+        <h1 id="partnerIdText">4S1001</h1>
+        <p id="countdown">Redirecting to Login... <span id="countdownValue">3</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 4Seed Portal
+  </footer>
+
+  <noscript>
+    <div class="noscript-warning">This registration page works best with JavaScript enabled. If JS is disabled, submission may be limited.</div>
+  </noscript>
+
+  <!-- Load scripts deferred to avoid blocking rendering -->
+  <script src="js/api.js" defer></script>
+  <script src="js/register.js" defer></script>
 </body>
-
 </html>
